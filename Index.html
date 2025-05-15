@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinic Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background: #f8f9fa;
+            border-right: 1px solid #dee2e6
+        }
+
+        .main-content {
+            padding: 20px
+        }
+
+        .appointment-card {
+            transition: transform .2s
+        }
+
+        .appointment-card:hover {
+            transform: translateY(-2px)
+        }
+
+        /* ألوان الطوابير */
+        [data-queue-position="1"] {
+            border-color: #dc3545 !important
+        }
+
+        [data-queue-position="2"] {
+            border-color: #ffc107 !important
+        }
+
+        [data-queue-position="3"] {
+            border-color: #0d6efd !important
+        }
+
+        [data-queue-position="0"] {
+            border-color: #ccc !important
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-lg-2 sidebar p-1">
+                <h4 class="m-4">Clinic Portal</h4>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">
+                        <i class="fas fa-calendar-check me-2"></i>Book Appointment
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-clipboard-list me-2"></i>Follow Up
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-history me-2"></i>Appointment History
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-user-md me-2"></i>Doctors
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-9 col-lg-10 main-content">
+                <h3 class="mb-4">Today's Appointments</h3>
+                <div class="card mb-3 border border-3 border-success">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title">Currently With Doctor</h5>
+                            <span class="badge bg-success">In Consultation</span>
+                        </div>
+                        <div id="current-patient"></div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 g-4 queue-list">
+                    <!-- بطاقة مثال -->
+                    <div class="col">
+                        <div class="card appointment-card shadow-sm mb-3 border border-3" data-queue-position="1">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <h5 class="card-title">John Doe</h5>
+                                        <span class="badge bg-secondary queue-badge">Queue #1</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input type="number" class="queue-position-input form-control form-control-sm"
+                                            value="1" style="width:60px" min="0">
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <i class="fas fa-clock text-primary me-2"></i>10:00 AM - 10:30 AM<br>
+                                    <i class="fas fa-stethoscope text-info me-2"></i>Follow-up Visit<br>
+                                    <i class="fas fa-info-circle text-warning me-2"></i>Blood Test Results Review
+                                </p>
+                                <button class="btn btn-primary w-100 enter-room-btn">
+                                    <i class="fas fa-door-open me-2"></i>Enter Doctor Room
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card appointment-card shadow-sm mb-3 border border-3" data-queue-position="2">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <h5 class="card-title">John Doe</h5>
+                                        <span class="badge bg-secondary queue-badge">Queue #2</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input type="number" class="queue-position-input form-control form-control-sm"
+                                            value="2" style="width:60px" min="0">
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <i class="fas fa-clock text-primary me-2"></i>10:00 AM - 10:30 AM<br>
+                                    <i class="fas fa-stethoscope text-info me-2"></i>Follow-up Visit<br>
+                                    <i class="fas fa-info-circle text-warning me-2"></i>Blood Test Results Review
+                                </p>
+                                <button class="btn btn-primary w-100 enter-room-btn">
+                                    <i class="fas fa-door-open me-2"></i>Enter Doctor Room
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card appointment-card shadow-sm mb-3 border border-3" data-queue-position="3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <h5 class="card-title">John Doe</h5>
+                                        <span class="badge bg-secondary queue-badge">Queue #3</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input type="number" class="queue-position-input form-control form-control-sm"
+                                            value="3" style="width:60px" min="0">
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <i class="fas fa-clock text-primary me-2"></i>10:00 AM - 10:30 AM<br>
+                                    <i class="fas fa-stethoscope text-info me-2"></i>Follow-up Visit<br>
+                                    <i class="fas fa-info-circle text-warning me-2"></i>Blood Test Results Review
+                                </p>
+                                <button class="btn btn-primary w-100 enter-room-btn">
+                                    <i class="fas fa-door-open me-2"></i>Enter Doctor Room
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card appointment-card shadow-sm mb-3 border border-3" data-queue-position="4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <h5 class="card-title">John Doe</h5>
+                                        <span class="badge bg-secondary queue-badge">Queue #4</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input type="number" class="queue-position-input form-control form-control-sm"
+                                            value="4" style="width:60px" min="0">
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    <i class="fas fa-clock text-primary me-2"></i>10:00 AM - 10:30 AM<br>
+                                    <i class="fas fa-stethoscope text-info me-2"></i>Follow-up Visit<br>
+                                    <i class="fas fa-info-circle text-warning me-2"></i>Blood Test Results Review
+                                </p>
+                                <button class="btn btn-primary w-100 enter-room-btn">
+                                    <i class="fas fa-door-open me-2"></i>Enter Doctor Room
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.queue-list');
+
+            container.querySelectorAll('.queue-position-input').forEach(inp => {
+                inp.addEventListener('change', () => {
+                    const card = inp.closest('.card');
+                    const v = parseInt(inp.value) || 0;
+                    card.dataset.queuePosition = v;
+                    card.querySelector('.queue-badge').textContent = v > 0 ? `Queue #${v}` : '';
+                    sortQueue();
+                    updateButtons();
+                });
+            });
+
+            container.querySelectorAll('.enter-room-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const card = btn.closest('.card');
+                    const col = card.closest('.col');
+
+                    card.dataset.queuePosition = 0;
+                    card.querySelector('.queue-position-input').value = 0;
+                    card.querySelector('.queue-badge').textContent = '';
+
+                    btn.disabled = true;
+                    btn.classList.replace('btn-primary', 'btn-success');
+                    btn.innerHTML = '<i class="fas fa-clock me-2"></i>In Consultation';
+
+                    card.dataset.status = 'with-doctor';
+                    document.querySelector('#current-patient').innerHTML = card.outerHTML;
+
+                    col.remove();
+                    sortQueue();
+                    updateButtons();
+                });
+            });
+
+
+            function sortQueue() {
+                const cols = Array.from(container.querySelectorAll('.col'));
+                const nonZero = [];
+                const zeros = [];
+                cols.forEach(col => {
+                    const v = parseInt(col.querySelector('.queue-position-input').value) || 0;
+                    if (v > 0) nonZero.push(col);
+                    else zeros.push(col);
+                });
+                nonZero.sort((a, b) => a.dataset.queuePosition - b.dataset.queuePosition);
+                container.innerHTML = '';
+                nonZero.forEach((col, idx) => {
+                    const card = col.querySelector('.card');
+                    const inp = col.querySelector('.queue-position-input');
+                    const badge = col.querySelector('.queue-badge');
+                    const pos = idx + 1;
+                    card.dataset.queuePosition = pos;
+                    inp.value = pos;
+                    badge.textContent = `Queue #${pos}`;
+                    container.appendChild(col);
+                });
+                zeros.forEach(col => container.appendChild(col));
+            }
+
+            function updateButtons() {
+                container.querySelectorAll('.card').forEach((card, i) => {
+                    const btn = card.querySelector('.enter-room-btn');
+                    if (!btn) return;
+                    if (i === 0) {
+                        btn.disabled = false;
+                        btn.classList.replace('btn-outline-secondary', 'btn-primary');
+                        btn.innerHTML = '<i class="fas fa-door-open me-2"></i>Enter Doctor Room';
+                    } else {
+                        btn.disabled = true;
+                        btn.classList.replace('btn-primary', 'btn-outline-secondary');
+                        btn.innerHTML = '<i class="fas fa-clock me-2"></i>Not Available Yet';
+                    }
+                });
+            }
+
+            sortQueue();
+            updateButtons();
+        });
+
+    </script>
